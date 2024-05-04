@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    
+    tools {nodejs "node"}
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                git 'https://github.com/uzzal71/jenkins-node.git'
+                bat "npm install"
+            }
+        }
+        stage('Start Server') {
+            steps {
+                echo 'Starting server...'
+                bat "npm start"
+            }
+        }
+    }
+}
