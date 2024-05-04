@@ -1,20 +1,12 @@
 pipeline {
     agent any
-    
-    tools {nodejs "node"}
-
+    tools {
+        nodejs '22.1.0'
+    }
     stages {
-        stage('Build') {
+        stage('Example') {
             steps {
-                echo 'Building...'
-                git 'https://github.com/uzzal71/jenkins-node.git'
-                bat "npm install"
-            }
-        }
-        stage('Start Server') {
-            steps {
-                echo 'Starting server...'
-                bat "npm start"
+                sh 'npm version'
             }
         }
     }
