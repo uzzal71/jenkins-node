@@ -1,0 +1,25 @@
+---
+- name: Run Node.js application and install npm dependencies
+  hosts: 146.190.36.150
+  become: yes  # Run tasks with elevated privileges
+
+  tasks:
+  - name: Copy code to the server
+      copy:
+        src: /var/lib/jenkins/workspace/git-demo
+        dest: /app/jenkins-node
+
+    - name: Change directory to the application folder
+      become_user: jenkins
+      become_method: su
+      shell: cd /app/jenkins-node
+
+    - name: Install npm dependencies
+      become_user: jenkins
+      become_method: su
+      shell: npm install
+
+    - name: Start Node.js application
+      become_user: jenkins
+      become_method: su
+      shell: npm start
